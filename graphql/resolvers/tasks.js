@@ -10,5 +10,6 @@ module.exports = {
         throw new Error(err);
       }
     },
+    helloWorld: () => "Hello World",
   },
 };
