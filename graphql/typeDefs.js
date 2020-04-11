@@ -9,6 +9,9 @@ module.exports = gql`
 
   type Query {
     getTasks: [Task]
-    helloWorld: String!
+  }
+
+  type Mutation {
+    createTask(body: String!): Task!
   }
 `;

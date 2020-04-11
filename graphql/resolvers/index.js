@@ -4,4 +4,7 @@ module.exports = {
   Query: {
     ...tasksResolvers.Query,
   },
+  Mutation: {
+    ...tasksResolvers.Mutation,
+  },
 };
