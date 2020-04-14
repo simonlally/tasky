@@ -4,6 +4,7 @@ module.exports = gql`
   type Task {
     id: ID!
     body: String!
+    createdAt: String!
     completed: Boolean!
   }
 
