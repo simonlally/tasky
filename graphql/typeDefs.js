@@ -25,10 +25,12 @@ module.exports = gql`
 
   type Query {
     getTasks: [Task]
+    getTask(taskId: ID!): Task
   }
 
   type Mutation {
     createTask(body: String!): Task!
+    deleteTask(taskId: ID!): String!
     register(registerInput: RegisterInput): User!
     login(username: String!, password: String!): User!
   }

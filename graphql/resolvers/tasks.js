@@ -10,6 +10,19 @@ module.exports = {
         throw new Error(err);
       }
     },
+    async getTask(_, { taskId }) {
+      try {
+        const task = await Task.findById(taskId);
+
+        if (task) {
+          return task;
+        } else {
+          throw new Error("Task not found");
+        }
+      } catch (err) {
+        throw new Error(err);
+      }
+    },
   },
 
   Mutation: {
