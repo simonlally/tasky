@@ -22,6 +22,7 @@ module.exports = {
       const newTask = new Task({
         body,
         completed: false,
+        createdAt: new Date().toISOString(),
       });
 
       const task = await newTask.save();
