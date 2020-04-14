@@ -1,4 +1,5 @@
 const Task = require("../../models/Task");
+const validateAuth = require("../../util/validateAuth");
 
 module.exports = {
   Query: {
@@ -26,20 +27,21 @@ module.exports = {
   },
 
   Mutation: {
-    async createTask(_, { body }) {
-      console.log("body: ", body);
+    async createTask(_, { body }, context) {
+      const user = validateAuth(context);
       if (body.trim() === "") {
         throw new Error("Task cannot be empty");
       }
 
       const newTask = new Task({
         body,
+        user: user.id,
+        username: user.username,
         completed: false,
         createdAt: new Date().toISOString(),
       });
 
       const task = await newTask.save();
-      console.log("TASK", task);
       return task;
     },
   },

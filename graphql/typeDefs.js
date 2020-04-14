@@ -5,6 +5,7 @@ module.exports = gql`
     id: ID!
     body: String!
     createdAt: String!
+    username: String!
     completed: Boolean!
   }
 
@@ -30,7 +31,6 @@ module.exports = gql`
 
   type Mutation {
     createTask(body: String!): Task!
-    deleteTask(taskId: ID!): String!
     register(registerInput: RegisterInput): User!
     login(username: String!, password: String!): User!
   }
