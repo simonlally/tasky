@@ -1,6 +1,8 @@
 const Task = require("../../models/Task");
 const validateAuth = require("../../util/validateAuth");
 
+const { AuthenticationError } = require("apollo-server");
+
 module.exports = {
   Query: {
     async getTasks() {
@@ -43,6 +45,23 @@ module.exports = {
 
       const task = await newTask.save();
       return task;
+    },
+
+    async deleteTask(_, { taskId }, context) {
+      const user = validateAuth(context);
+
+      try {
+        const task = await Task.findById(taskId);
+
+        if (user.username === task.username) {
+          await task.delete();
+          return "Task deleted successfully";
+        } else {
+          throw new AuthenticationError("Not Allowed");
+        }
+      } catch (err) {
+        throw new AuthenticationError(err);
+      }
     },
   },
 };
