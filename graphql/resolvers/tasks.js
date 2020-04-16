@@ -1,7 +1,7 @@
 const Task = require("../../models/Task");
 const validateAuth = require("../../util/validateAuth");
 
-const { AuthenticationError } = require("apollo-server");
+const { AuthenticationError, UserInputError } = require("apollo-server");
 
 module.exports = {
   Query: {
@@ -61,6 +61,26 @@ module.exports = {
         }
       } catch (err) {
         throw new AuthenticationError(err);
+      }
+    },
+
+    async completeTask(_, { taskId }, context) {
+      const user = validateAuth(context);
+
+      const task = await Task.findById(taskId);
+
+      if (task) {
+        if (task.username === user.username) {
+          if (task.completed === false) {
+            task.completed = true;
+          } else {
+            task.completed = false;
+          }
+          await task.save();
+          return task;
+        }
+      } else {
+        throw new UserInputError("task not found");
       }
     },
   },

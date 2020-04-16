@@ -34,5 +34,6 @@ module.exports = gql`
     deleteTask(taskId: ID!): String!
     register(registerInput: RegisterInput): User!
     login(username: String!, password: String!): User!
+    completeTask(taskId: ID!): Task!
   }
 `;
