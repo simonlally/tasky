@@ -35,5 +35,6 @@ module.exports = gql`
     register(registerInput: RegisterInput): User!
     login(username: String!, password: String!): User!
     completeTask(taskId: ID!): Task!
+    editTask(taskId: ID!, body: String!): Task!
   }
 `;

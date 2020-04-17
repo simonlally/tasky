@@ -80,7 +80,25 @@ module.exports = {
           return task;
         }
       } else {
-        throw new UserInputError("task not found");
+        throw new UserInputError("Task Not Found");
+      }
+    },
+
+    async editTask(_, { taskId, body }, context) {
+      const user = validateAuth(context);
+
+      const task = await Task.findById(taskId);
+
+      if (task) {
+        if (task.username === user.username) {
+          task.body = body;
+          await task.save();
+          return task;
+        } else {
+          throw new AuthenticationError("Not Allowed");
+        }
+      } else {
+        throw new UserInputError("Task Not Found");
       }
     },
   },
