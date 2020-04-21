@@ -1,5 +1,7 @@
 const axios = require("axios");
 
+// TODO make test cases more specific
+
 describe("user resolvers", () => {
   test("four required fields for register", async () => {
     const response = await axios.post("http://localhost:4000", {
