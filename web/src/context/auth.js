@@ -2,7 +2,7 @@ import React, { useReducer, createContext } from "react";
 import jwtDecoder from "jwt-decode";
 
 const initialState = {
-  user: null
+  user: null,
 };
 
 if (localStorage.getItem("jwtToken")) {
@@ -16,8 +16,8 @@ if (localStorage.getItem("jwtToken")) {
 
 const AuthContext = createContext({
   user: null,
-  login: data => {},
-  logout: () => {}
+  login: (data) => {},
+  logout: () => {},
 });
 
 // reducer
@@ -26,12 +26,12 @@ function authReducer(state, action) {
     case "LOGIN":
       return {
         ...state,
-        user: action.payload
+        user: action.payload,
       };
     case "LOGOUT":
       return {
         ...state,
-        user: null
+        user: null,
       };
     default:
       return state;
@@ -41,18 +41,18 @@ function authReducer(state, action) {
 function AuthProvider(props) {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  const login = data => {
+  const login = (data) => {
     localStorage.setItem("jwtToken", data.token);
     dispatch({
       type: "LOGIN",
-      payload: data
+      payload: data,
     });
   };
 
   const logout = () => {
     localStorage.removeItem("jwtToken");
     dispatch({
-      type: "LOGOUT"
+      type: "LOGOUT",
     });
   };
 
@@ -65,4 +65,3 @@ function AuthProvider(props) {
 }
 
 export { AuthContext, AuthProvider };
-© 2020 GitHub, Inc.
