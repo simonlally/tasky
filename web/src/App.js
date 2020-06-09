@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import "semantic-ui-css/semantic.min.css";
 
 import { AuthProvider } from "./context/auth";
+import MenuBar from "./components/MenuBar";
 import Home from "./pages/Home";
 
 import { Container } from "semantic-ui-react";
