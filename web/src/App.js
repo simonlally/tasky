@@ -13,6 +13,7 @@ export default function App() {
     <AuthProvider>
       <Container>
         <Router>
+          <MenuBar />
           <Route exact path="/" component={Home} />
         </Router>
       </Container>
