@@ -4,6 +4,8 @@ import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import { AuthContext } from "../context/auth";
 
+import { CardContainer } from "../styles/styles";
+
 export default function Login(props) {
   const context = useContext(AuthContext);
 
@@ -40,7 +42,7 @@ export default function Login(props) {
     <>
       <Grid centered columns={1}>
         <Grid.Row>
-          <Card style={{ border: "1px solid #53e2f5" }}>
+          <CardContainer>
             <Card.Content textAlign="left">
               <Form
                 onSubmit={onSubmit}
@@ -79,7 +81,7 @@ export default function Login(props) {
                 </div>
               )}
             </Card.Content>
-          </Card>
+          </CardContainer>
         </Grid.Row>
       </Grid>
     </>

@@ -26,6 +26,7 @@ module.exports = gql`
 
   type Query {
     getTasks: [Task]
+    getTasksByUser(username: String!): [Task]
     getTask(taskId: ID!): Task
   }
 

@@ -40,7 +40,7 @@ export default function Register(props) {
     <>
       <Grid centered columns={1}>
         <Grid.Row>
-          <Card style={{ border: "1px solid #53e2f5" }}>
+          <Card>
             <Card.Content textAlign="left">
               <Form
                 style={{ padding: "20px" }}

@@ -26,6 +26,15 @@ module.exports = {
         throw new Error(err);
       }
     },
+    async getTasksByUser(_, { username }) {
+      const tasks = await Task.find({ username });
+      console.log(tasks);
+      if (tasks) {
+        return tasks;
+      } else {
+        throw new Error("No tasks found");
+      }
+    },
   },
 
   Mutation: {
