@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 
 import { GET_TASKS_BY_USER_QUERY } from "../util/graphql";
+import NewTask from "./NewTask";
 
 const UserFeed = (user) => {
   const username = user.user.user.username;
@@ -19,11 +20,12 @@ const UserFeed = (user) => {
 
   return (
     <div>
+      <NewTask />
       {tasks.map((task) => (
         <div key={task.id}>
-          {" "}
           {task.body}
-          <div> username: {task.username} </div>{" "}
+          <div> created at: {task.createdAt} </div>
+          <div> username: {task.username} </div>
         </div>
       ))}
     </div>

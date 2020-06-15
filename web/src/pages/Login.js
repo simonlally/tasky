@@ -28,7 +28,6 @@ export default function Login(props) {
 
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(_, result) {
-      console.log(result);
       context.login(result.data.login);
       props.history.push("/");
     },

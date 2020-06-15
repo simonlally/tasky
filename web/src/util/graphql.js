@@ -11,3 +11,15 @@ export const GET_TASKS_BY_USER_QUERY = gql`
     }
   }
 `;
+
+// task mutations
+export const CREATE_TASK = gql`
+  mutation($body: String!) {
+    createTask(body: $body) {
+      id
+      body
+      username
+      createdAt
+    }
+  }
+`;
