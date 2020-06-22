@@ -5,7 +5,7 @@ import { Form, Button, Card, Header } from "semantic-ui-react";
 
 import { GET_TASKS_BY_USER_QUERY, CREATE_TASK } from "../util/graphql";
 
-const NewTask = (props) => {
+const NewTask = (username) => {
   const [values, setValues] = useState({
     body: "",
   });
@@ -17,10 +17,24 @@ const NewTask = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     createTask();
+    refreshPage();
+  };
+
+  const refreshPage = () => {
+    window.location.reload(false);
   };
 
   const [createTask, { error }] = useMutation(CREATE_TASK, {
     variables: values,
+    update(proxy, result) {
+      const data = proxy.readQuery({
+        query: GET_TASKS_BY_USER_QUERY,
+        variables: username,
+      });
+      data.getTasksByUser = [result.data.createTask, ...data.getTasksByUser];
+      proxy.writeQuery({ query: GET_TASKS_BY_USER_QUERY, data });
+      values.body = "";
+    },
   });
 
   return (

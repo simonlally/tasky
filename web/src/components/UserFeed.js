@@ -20,12 +20,16 @@ const UserFeed = (user) => {
 
   return (
     <div>
-      <NewTask />
+      <NewTask username={username} />
       {tasks.map((task) => (
         <div key={task.id}>
           {task.body}
           <div> created at: {task.createdAt} </div>
           <div> username: {task.username} </div>
+          <div>
+            {" "}
+            {task.completed ? <div> completed </div> : "not completed"}{" "}
+          </div>
         </div>
       ))}
     </div>
