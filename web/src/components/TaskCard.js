@@ -4,7 +4,9 @@ import moment from "moment";
 import { AuthContext } from "../context/auth";
 import { Card, Icon, Label, Button } from "semantic-ui-react";
 
-const TaskCard = ({ task: { username, createdAt, body, completed } }) => {
+import DeleteTask from "./DeleteTask";
+
+const TaskCard = ({ task: { id, username, createdAt, body, completed } }) => {
   const { user } = useContext(AuthContext);
 
   return (
@@ -17,6 +19,7 @@ const TaskCard = ({ task: { username, createdAt, body, completed } }) => {
           <div>
             {completed ? <div> completed </div> : <div> not completed </div>}
           </div>
+          <DeleteTask username={username} taskId={id} />
         </Card.Description>
       </Card.Content>
     </Card>
