@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/react-hooks";
 
 import { GET_TASKS_BY_USER_QUERY } from "../util/graphql";
 import NewTask from "./NewTask";
+import TaskCard from "./TaskCard";
 
 const UserFeed = (user) => {
   const username = user.user.user.username;
@@ -23,13 +24,7 @@ const UserFeed = (user) => {
       <NewTask username={username} />
       {tasks.map((task) => (
         <div key={task.id}>
-          {task.body}
-          <div> created at: {task.createdAt} </div>
-          <div> username: {task.username} </div>
-          <div>
-            {" "}
-            {task.completed ? <div> completed </div> : "not completed"}{" "}
-          </div>
+          <TaskCard task={task} />
         </div>
       ))}
     </div>
