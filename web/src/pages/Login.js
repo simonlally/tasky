@@ -6,25 +6,23 @@ import { AuthContext } from "../context/auth";
 
 import { CardContainer } from "../styles/styles";
 
+import { useForm } from "../util/hooks";
+
 export default function Login(props) {
   const context = useContext(AuthContext);
 
   const [errors, setErrors] = useState({});
-  const [values, setValues] = useState({
+
+  const login = () => {
+    loginUser();
+  };
+
+  const { onChange, onSubmit, values } = useForm(login, {
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-
-  const onChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    loginUser();
-  };
 
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(_, result) {

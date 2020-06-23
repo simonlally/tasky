@@ -4,29 +4,26 @@ import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import { AuthContext } from "../context/auth";
 
+import { useForm } from "../util/hooks";
+
 export default function Register(props) {
   const context = useContext(AuthContext);
 
   const [errors, setErrors] = useState({});
-  const [values, setValues] = useState({
+
+  const registerUser = () => {
+    addUser();
+  };
+
+  const { onChange, onSubmit, values } = useForm(registerUser, {
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
 
-  const onChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    addUser();
-  };
-
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
     update(_, result) {
-      console.log(result);
       context.login(result.data.register);
       props.history.push("/");
     },
