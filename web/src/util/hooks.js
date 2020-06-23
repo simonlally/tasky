@@ -7,17 +7,12 @@ export const useForm = (callback, initialState = {}) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const refreshPage = () => {
-    window.location.reload(false);
-  };
-
   const onSubmit = (e) => {
     e.preventDefault();
     callback();
   };
 
   return {
-    refreshPage,
     onChange,
     onSubmit,
     values,

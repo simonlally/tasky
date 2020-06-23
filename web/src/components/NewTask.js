@@ -4,25 +4,17 @@ import { useMutation } from "@apollo/react-hooks";
 import { Form, Button, Card, Header } from "semantic-ui-react";
 
 import { GET_TASKS_BY_USER_QUERY, CREATE_TASK } from "../util/graphql";
+import { useForm } from "../util/hooks";
 
 const NewTask = (username) => {
-  const [values, setValues] = useState({
-    body: "",
-  });
-
-  const onChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const newTask = () => {
     createTask();
-    refreshPage();
-  };
-
-  const refreshPage = () => {
     window.location.reload(false);
   };
+
+  const { onChange, onSubmit, values } = useForm(newTask, {
+    body: "",
+  });
 
   const [createTask, { error }] = useMutation(CREATE_TASK, {
     variables: values,
