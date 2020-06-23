@@ -6,6 +6,7 @@ import { AuthContext } from "../context/auth";
 
 import { CardContainer } from "../styles/styles";
 
+import { LOGIN_USER } from "../util/graphql";
 import { useForm } from "../util/hooks";
 
 export default function Login(props) {
@@ -84,15 +85,3 @@ export default function Login(props) {
     </>
   );
 }
-
-const LOGIN_USER = gql`
-  mutation login($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
-      id
-      email
-      username
-      createdAt
-      token
-    }
-  }
-`;
