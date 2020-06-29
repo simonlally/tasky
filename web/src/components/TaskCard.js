@@ -11,11 +11,8 @@ import { EDIT_TASK, GET_TASKS_BY_USER_QUERY } from "../util/graphql";
 
 const TaskCard = ({ task: { id, username, createdAt, body, completed } }) => {
   const { user } = useContext(AuthContext);
-  const [newTaskBody, setNewTaskBody] = useState(body);
 
   // const [isToggleOn, setIsToggleOn] = useState(false);
-
-  let newTaskbody = "";
 
   const save = (body) => {
     editTask({ variables: { taskId: id, body: body } });
