@@ -30,6 +30,16 @@ export const DELETE_TASK = gql`
   }
 `;
 
+export const EDIT_TASK = gql`
+  mutation($taskId: ID!, $body: String!) {
+    editTask(taskId: $taskId, body: $body) {
+      id
+      body
+      completed
+    }
+  }
+`;
+
 // user mutations
 export const REGISTER_USER = gql`
   mutation register(

@@ -19,9 +19,7 @@ export default function Login(props) {
 
   const { onChange, onSubmit, values } = useForm(login, {
     username: "",
-    email: "",
     password: "",
-    confirmPassword: "",
   });
 
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
