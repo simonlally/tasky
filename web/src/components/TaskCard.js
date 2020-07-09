@@ -5,14 +5,18 @@ import EasyEdit from "react-easy-edit";
 
 import DeleteTask from "./DeleteTask";
 import { AuthContext } from "../context/auth";
-import { Card, Button, Form } from "semantic-ui-react";
+import { Card, Button, Form, Checkbox } from "semantic-ui-react";
 
-import { EDIT_TASK, GET_TASKS_BY_USER_QUERY } from "../util/graphql";
+import {
+  EDIT_TASK,
+  GET_TASKS_BY_USER_QUERY,
+  TOGGLE_TASK,
+} from "../util/graphql";
 
 const TaskCard = ({ task: { id, username, createdAt, body, completed } }) => {
   const { user } = useContext(AuthContext);
 
-  // const [isToggleOn, setIsToggleOn] = useState(false);
+  const [currentStatus, setCurrentStatus] = useState(completed ? true : false);
 
   const save = (body) => {
     editTask({ variables: { taskId: id, body: body } });
@@ -23,13 +27,22 @@ const TaskCard = ({ task: { id, username, createdAt, body, completed } }) => {
   };
 
   const [editTask] = useMutation(EDIT_TASK);
+  const [toggleTask] = useMutation(TOGGLE_TASK);
 
-  // function handleClick() {
-  //   isToggleOn ? setIsToggleOn(false) : setIsToggleOn(true);
-  // }
+  const onCheck = () => {
+    toggleTask({ variables: { taskId: id } });
+
+    console.log("current status is now: ", currentStatus);
+
+    if (currentStatus === true) {
+      setCurrentStatus(false);
+    } else if (currentStatus === false) {
+      setCurrentStatus(true);
+    }
+  };
 
   return (
-    <Card fluid>
+    <Card onClick={() => console.log(completed)} fluid>
       <Card.Content style={{ height: "100px" }}>
         <Card.Meta>{moment(createdAt).fromNow()}</Card.Meta>
         <Card.Description>
@@ -44,6 +57,8 @@ const TaskCard = ({ task: { id, username, createdAt, body, completed } }) => {
             instructions=""
             allowEdit={true}
           />
+
+          <Checkbox onClick={onCheck} />
 
           <div>
             {completed ? <div> completed </div> : <div> not completed </div>}

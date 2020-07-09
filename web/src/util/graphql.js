@@ -7,6 +7,7 @@ export const GET_TASKS_BY_USER_QUERY = gql`
       id
       body
       username
+      completed
       createdAt
     }
   }
@@ -35,6 +36,14 @@ export const EDIT_TASK = gql`
     editTask(taskId: $taskId, body: $body) {
       id
       body
+      completed
+    }
+  }
+`;
+
+export const TOGGLE_TASK = gql`
+  mutation($taskId: ID!) {
+    completeTask(taskId: $taskId) {
       completed
     }
   }
