@@ -42,7 +42,10 @@ const TaskCard = ({ task: { id, username, createdAt, body, completed } }) => {
   };
 
   return (
-    <Card onClick={() => console.log(completed)} fluid>
+    <Card
+      style={{ marginTop: "25px", marginBottom: "25px", paddingBottom: "40px" }}
+      fluid
+    >
       <Card.Content style={{ height: "100px" }}>
         <Card.Meta>{moment(createdAt).fromNow()}</Card.Meta>
         <Card.Description>
