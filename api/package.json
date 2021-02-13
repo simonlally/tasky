@@ -18,7 +18,7 @@
     "mongoose": "^5.9.7"
   },
   "devDependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-jest": "^25.4.0",
     "jest": "^25.4.0"
   }
